@@ -1,0 +1,38 @@
+# Creating Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eventbus
+spec:
+  selector:
+    matchLabels:
+      app: eventbus
+  template:
+    metadata:
+      labels:
+        app: eventbus
+    spec:
+      containers:
+        - name: eventbus
+          image: varma1909/eventbus
+          # resources:
+          #   limits:
+          #     memory: "128Mi"
+          #     cpu: "500m"
+          # ports:
+          # - containerPort: <Port>
+---
+# Creating Cluster IP Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: eventbus-srv
+spec:
+  selector:
+    app: eventbus
+  type: ClusterIP
+  ports:
+    - name: event-bus
+      protocol: TCP
+      port: 5050
+      targetPort: 5050
