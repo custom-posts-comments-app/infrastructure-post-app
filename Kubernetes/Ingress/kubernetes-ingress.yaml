@@ -14,3 +14,15 @@ spec:
             backend:
               serviceName: posts
               servicePort: 5001
+          - path: /comment/?(.*)
+            backend:
+              serviceName: comments-service
+              servicePort: 5002
+          - path: /query/?(.*)
+            backend:
+              serviceName: print-query-service
+              servicePort: 5003
+          - path: /
+            backend:
+              serviceName: client-service
+              servicePort: 4200
